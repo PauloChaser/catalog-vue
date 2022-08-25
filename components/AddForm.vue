@@ -5,10 +5,10 @@
       <input
         id="product-name"
         v-model="name"
-        type="email"
+        type="text"
         class="input"
         name="product-name"
-        data-validation="email"
+        data-validation="required"
         placeholder="Введите наименование товара"
       />
       <span class="form__inputError">Поле является обязательным</span>
@@ -26,9 +26,9 @@
     </div>
 
     <div class="form__inputWrapper form__inputWrapper--required">
-      <label for="product-link"
-      ><span>Ссылка на изображение товара</span></label
-      >
+      <label for="product-link">
+        <span>Ссылка на изображение товара</span>
+      </label>
       <input
         id="product-link"
         v-model="link"
@@ -60,9 +60,9 @@
         type="submit"
         class="button"
         value="Добавить товар"
-        disabled="disabled"
         v-on:click.prevent="addproduct(link, name, description, price)"
       />
+      <!--      добавить выше  disabled="disabled"-->
     </div>
   </form>
 </template>

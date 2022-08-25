@@ -1,18 +1,5 @@
 <template>
   <section class="container addProduct">
-    <!--    <div class="container__row">-->
-    <!--        <h2 class="addProduct__title">Добавление товара</h2>-->
-    <!--&lt;!&ndash;        <div class="addProduct__filter">&ndash;&gt;-->
-
-    <!--&lt;!&ndash;&lt;!&ndash;            реализация фильтра не нравится +  в мобилке хз как его кинуть вниз&ndash;&gt;&ndash;&gt;-->
-
-    <!--&lt;!&ndash;            <select class="select " name="type">&ndash;&gt;-->
-    <!--&lt;!&ndash;                <option value="По умолчанию">По умолчанию</option>&ndash;&gt;-->
-    <!--&lt;!&ndash;                <option value="По возрастанию цены">По возрастанию цены</option>&ndash;&gt;-->
-    <!--&lt;!&ndash;                <option value="По убыванию цены">По убыванию цены</option>&ndash;&gt;-->
-    <!--&lt;!&ndash;            </select>&ndash;&gt;-->
-    <!--&lt;!&ndash;        </div>&ndash;&gt;-->
-    <!--    </div>-->
     <div class="container__row">
       <div class="addProduct__content">
         <div class="addProduct__leftSide">
@@ -21,8 +8,6 @@
         </div>
         <div class="container__catalog catalog">
           <div class="catalog__filter">
-            <!--            реализация фильтра не нравится +  в мобилке хз как его кинуть вниз-->
-
             <select class="select" name="type">
               <option value="По умолчанию">По умолчанию</option>
               <option value="По возрастанию цены">По возрастанию цены</option>
