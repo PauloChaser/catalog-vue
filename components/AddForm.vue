@@ -4,6 +4,7 @@
       <label for="product-name"><span>Наименование товара</span></label>
       <input
         id="product-name"
+        v-model="name"
         type="email"
         class="input"
         name="product-name"
@@ -17,6 +18,7 @@
       <label for="product-description"><span>Описание товара</span></label>
       <textarea
         id="product-description"
+        v-model="description"
         class="textarea"
         placeholder="Введите описание товара"
       >
@@ -25,10 +27,11 @@
 
     <div class="form__inputWrapper form__inputWrapper--required">
       <label for="product-link"
-        ><span>Ссылка на изображение товара</span></label
+      ><span>Ссылка на изображение товара</span></label
       >
       <input
         id="product-link"
+        v-model="link"
         type="text"
         class="input"
         name="product-link"
@@ -42,6 +45,7 @@
       <label for="product-price"><span>Цена товара</span></label>
       <input
         id="product-price"
+        v-model="price"
         type="text"
         class="input"
         name="product-price"
@@ -57,13 +61,27 @@
         class="button"
         value="Добавить товар"
         disabled="disabled"
+        v-on:click.prevent="addproduct(link, name, description, price)"
       />
     </div>
   </form>
 </template>
 
 <script>
-export default {}
+export default {
+  props: [
+    'addproduct'
+  ],
+
+  data() {
+    return {
+      link: '',
+      name: '',
+      description: '',
+      price: '',
+    }
+  }
+}
 </script>
 
 <style scoped>
