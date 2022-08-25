@@ -1,28 +1,13 @@
 <template>
   <section class="container addProduct">
-    <!--    <div class="container__row">-->
-    <!--        <h2 class="addProduct__title">Добавление товара</h2>-->
-    <!--&lt;!&ndash;        <div class="addProduct__filter">&ndash;&gt;-->
-
-    <!--&lt;!&ndash;&lt;!&ndash;            реализация фильтра не нравится +  в мобилке хз как его кинуть вниз&ndash;&gt;&ndash;&gt;-->
-
-    <!--&lt;!&ndash;            <select class="select " name="type">&ndash;&gt;-->
-    <!--&lt;!&ndash;                <option value="По умолчанию">По умолчанию</option>&ndash;&gt;-->
-    <!--&lt;!&ndash;                <option value="По возрастанию цены">По возрастанию цены</option>&ndash;&gt;-->
-    <!--&lt;!&ndash;                <option value="По убыванию цены">По убыванию цены</option>&ndash;&gt;-->
-    <!--&lt;!&ndash;            </select>&ndash;&gt;-->
-    <!--&lt;!&ndash;        </div>&ndash;&gt;-->
-    <!--    </div>-->
     <div class="container__row">
       <div class="addProduct__content">
         <div class="addProduct__leftSide">
           <h2 class="addProduct__title">Добавление товара</h2>
-          <AddForm class="addProduct__form"/>
+          <AddForm class="addProduct__form" :addproduct="addProduct"/>
         </div>
         <div class="container__catalog catalog">
           <div class="catalog__filter">
-            <!--            реализация фильтра не нравится +  в мобилке хз как его кинуть вниз-->
-
             <select class="select" name="type">
               <option value="По умолчанию">По умолчанию</option>
               <option value="По возрастанию цены">По возрастанию цены</option>
@@ -30,7 +15,7 @@
             </select>
           </div>
           <div class="catalog__items">
-            <CatalogItem v-for="item in items" :key="item"/>
+            <CatalogItem v-for="item in items" :key="item" :product="item"/>
           </div>
         </div>
       </div>
@@ -45,6 +30,7 @@ export default {
       items: [
         {
           image: '/item-img.jpg',
+          imageRetina: '/item-img-retina.jpg',
           name: 'Наименование товара',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
@@ -53,37 +39,46 @@ export default {
         },
         {
           image: '/item-img.jpg',
+          imageRetina: '/item-img-retina.jpg',
           name: 'Наименование товара',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
             '                                Довольно-таки интересное описание товара в несколько строк',
-          price: '10 000 руб.',
+          price: '11 000 руб.',
         },
         {
           image: '/item-img.jpg',
+          imageRetina: '/item-img-retina.jpg',
           name: 'Наименование товара',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
             '                                Довольно-таки интересное описание товара в несколько строк',
-          price: '10 000 руб.',
+          price: '14 000 руб.',
         },
         {
           image: '/item-img.jpg',
+          imageRetina: '/item-img-retina.jpg',
           name: 'Наименование товара',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
             '                                Довольно-таки интересное описание товара в несколько строк',
-          price: '10 000 руб.',
+          price: '16 000 руб.',
         },
         {
           image: '/item-img.jpg',
+          imageRetina: '/item-img.jpg',
           name: 'Наименование товара',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
             '                                Довольно-таки интересное описание товара в несколько строк',
-          price: '10 000 руб.',
+          price: '19 000 руб.',
         },
       ],
+    }
+  },
+  methods: {
+    addProduct(link, name, description, price) {
+      this.items.push({image: link, imageRetina: link, name, description, price})
     }
   },
 }

@@ -1,22 +1,32 @@
 <template>
-  <form action="#" method="post" class="form">
+  <form
+    action="#"
+    method="post"
+    class="form"
+    @submit="isFormValid"
+  >
     <div class="form__inputWrapper form__inputWrapper--required">
       <label for="product-name"><span>Наименование товара</span></label>
       <input
         id="product-name"
-        type="email"
+        v-model="form.name"
+        @input="validateName(form.name)"
+        @blur="validation.nameValid.isShown=!validation.nameValid.isValid"
+        type="text"
         class="input"
         name="product-name"
-        data-validation="email"
+        data-validation="required"
         placeholder="Введите наименование товара"
       />
-      <span class="form__inputError">Поле является обязательным</span>
+      <span v-if="validation.nameValid.isShown"
+            class="form__inputError">Поле является обязательным</span>
     </div>
 
     <div class="form__inputWrapper">
       <label for="product-description"><span>Описание товара</span></label>
       <textarea
         id="product-description"
+        v-model="form.description"
         class="textarea"
         placeholder="Введите описание товара"
       >
@@ -24,46 +34,125 @@
     </div>
 
     <div class="form__inputWrapper form__inputWrapper--required">
-      <label for="product-link"
-        ><span>Ссылка на изображение товара</span></label
-      >
+      <label for="product-link">
+        <span>Ссылка на изображение товара</span>
+      </label>
       <input
         id="product-link"
-        type="text"
+        v-model="form.link"
+        @input="validateLink(form.link)"
+        @blur="validation.linkValid.isShown=!validation.linkValid.isValid"
+        type="url"
         class="input"
         name="product-link"
         data-validation="required"
         placeholder="Введите ссылку"
       />
-      <span class="form__inputError">Поле является обязательным</span>
+      <span v-if="validation.linkValid.isShown"
+            class="form__inputError">Неверный формат ссылки</span>
     </div>
 
     <div class="form__inputWrapper form__inputWrapper--required">
       <label for="product-price"><span>Цена товара</span></label>
       <input
         id="product-price"
+        v-model="form.price"
+        @input="validatePrice(form.price=numberWithCommas)"
+
+        @blur="validation.priceValid.isShown=!validation.priceValid.isValid"
         type="text"
         class="input"
         name="product-price"
         data-validation="required"
         placeholder="Введите цену"
       />
-      <span class="form__inputError">Поле является обязательным</span>
+      <span v-if="validation.priceValid.isShown"
+            class="form__inputError">Поле является обязательным</span>
     </div>
 
     <div class="form__button">
       <input
-        type="submit"
+        type="button"
         class="button"
         value="Добавить товар"
-        disabled="disabled"
+        :disabled="!isFormValid"
+        @click.prevent="addproduct(link, name, description, price)"
       />
+      <!--      добавить выше  disabled="disabled"-->
     </div>
   </form>
 </template>
 
 <script>
-export default {}
+export default {
+
+  props: [
+    'addproduct'
+  ],
+
+  data() {
+    return {
+      form: {
+        link: '',
+        name: '',
+        description: '',
+        price: '',
+
+      },
+      validation: {
+        nameValid: {
+          isValid: false,
+          isShown: false,
+        },
+        linkValid: {
+          isValid: false,
+          isShown: false,
+        },
+        priceValid: {
+          isValid: false,
+          isShown: false,
+        },
+      }
+    }
+  },
+
+  computed: {
+    isFormValid() {
+      return (this.validation.nameValid.isValid && this.validation.linkValid.isValid && this.validation.priceValid.isValid)
+    },
+
+    numberWithCommas() {
+      return this.form.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, " ");
+
+    }
+  },
+
+  methods: {
+    validURL(str) {
+      const res = str.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g);
+      return (res !== null)
+
+    },
+
+    validateName(name) {
+      this.validation.nameValid.isValid = name.length > 3;
+      this.validation.nameValid.isShown = false
+    },
+
+    validateLink(link) {
+      this.validation.linkValid.isShown = false
+
+      this.validation.linkValid.isValid = this.validURL(link)
+    },
+
+    validatePrice(price) {
+      Number(price)
+      this.validation.priceValid.isValid = price.length > 0;
+      this.validation.priceValid.isShown = false
+    },
+
+  },
+}
 </script>
 
 <style scoped>

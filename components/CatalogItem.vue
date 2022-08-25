@@ -2,25 +2,28 @@
   <div class="item">
     <div class="item__img">
       <img
-        src="/item-img.jpg"
-        srcset="item-img.jpg 1x, item-img-retina.jpg 2x"
+        :src="product.image"
+        :srcset="product.image +' 1x,' + product.imageRetina +' 2x'"
         alt="Product photo"
       />
     </div>
     <div class="item__info">
-      <h3 class="item__name">Наименование товара</h3>
+      <h3 class="item__name">{{ product.name }}</h3>
       <p class="item__description">
-        Довольно-таки интересное описание товара в несколько строк.
-        Довольно-таки интересное описание товара в несколько строк
+        {{ product.description }}
       </p>
-      <span class="item__price">10 000 руб.</span>
+      <span class="item__price"> {{ product.price}} руб.</span>
     </div>
     <div class="item__remove"></div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: [
+    'product'
+  ]
+}
 </script>
 
 <style>
@@ -35,16 +38,16 @@ export default {}
 }
 
 .item__img {
+  display: flex;
   width: 100%;
-  height: auto;
+  height: 200px;
   overflow: hidden;
   border-radius: 4px 4px 0 0;
 }
 
 .item__img img {
   width: 100%;
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
   transition: transform 200ms ease;
 }
 
