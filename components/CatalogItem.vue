@@ -12,7 +12,7 @@
       <p class="item__description">
         {{ product.description }}
       </p>
-      <span class="item__price"> {{ product.price }} </span>
+      <span class="item__price"> {{ product.price}} руб.</span>
     </div>
     <div class="item__remove"></div>
   </div>
