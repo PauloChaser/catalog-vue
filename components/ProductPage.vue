@@ -15,7 +15,10 @@
               <option value="desc">По убыванию цены</option>
             </select>
           </div>
-          <div class="catalog__items">
+          <div v-if="isLoading" class="catalog__loader">
+            <SpinnerLoader />
+          </div>
+          <div v-else class="catalog__items">
             <CatalogItem
               v-for="item in sortedItems"
               :key="item.id"
@@ -80,18 +83,35 @@ export default {
           price: 19000,
         },
       ],
-      selected: 'default'
+      selected: 'default',
+      isLoading: true,
     }
+  },
+
+  beforeMount() {
+    if (localStorage.getItem('items')) {
+      try {
+        this.items = JSON.parse(localStorage.getItem('items'));
+      } catch(e) {
+        localStorage.removeItem('items');
+      }
+    }
+    this.isLoading = false
   },
 
   methods: {
     addProduct(link, name, description, price) {
       const id = Math.random().toString(36).slice(2)
       this.items.push({id, image: link, name, description, price})
+      this.setLocalItems()
     },
     removeProduct(id) {
       this.items = this.items.filter((item) => item.id !== id)
+      this.setLocalItems()
     },
+    setLocalItems() {
+      localStorage.setItem('items', JSON.stringify(this.items))
+    }
   },
 
   computed: {
@@ -187,12 +207,18 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .catalog__filter {
   width: fit-content;
   align-self: flex-end;
   margin-bottom: 16px;
+}
+
+.catalog__loader {
+  flex-basis: 75%;
+  width: 100%;
 }
 
 .catalog__items {
