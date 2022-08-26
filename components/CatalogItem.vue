@@ -1,33 +1,30 @@
 <template>
   <div class="item">
     <div class="item__img">
-      <img
-        :src="product.image"
-        :srcset="product.image +' 1x,' + product.imageRetina +' 2x'"
-        alt="Product photo"
-      />
+      <img :src="product.image" alt="Product photo" />
     </div>
     <div class="item__info">
       <h3 class="item__name">{{ product.name }}</h3>
       <p class="item__description">
         {{ product.description }}
       </p>
-      <span class="item__price"> {{ product.price}} руб.</span>
+      <span class="item__price"> {{ product.price }} руб.</span>
     </div>
-    <div class="item__remove"></div>
+    <div class="item__remove" @click="removeproduct(product.id)"></div>
   </div>
 </template>
 
 <script>
 export default {
-  props: [
-    'product'
-  ]
+  props: ['product', 'removeproduct'],
 }
 </script>
 
 <style>
 .item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: #fffefb;
   box-shadow: 0 20px 30px rgb(0 0 0 / 4%), 0 6px 10px rgb(0 0 0 / 2%);
   border-radius: 4px;
@@ -56,6 +53,10 @@ export default {
 }
 
 .item__info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 16px 16px 24px;
 }
 
@@ -106,7 +107,6 @@ export default {
   transform: translate(0, 0);
 }
 
-
 @media screen and (max-width: 1023px) {
   .item__info {
     padding: 16px 16px 24px;
@@ -127,12 +127,9 @@ export default {
   }
 }
 
-
 @media screen and (max-width: 820px) {
-
 }
 
 @media screen and (max-width: 580px) {
-
 }
 </style>

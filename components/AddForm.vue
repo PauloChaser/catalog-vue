@@ -1,25 +1,21 @@
 <template>
-  <form
-    action="#"
-    method="post"
-    class="form"
-    @submit="isFormValid"
-  >
+  <form action="#" method="post" class="form" @submit="isFormValid">
     <div class="form__inputWrapper form__inputWrapper--required">
       <label for="product-name"><span>Наименование товара</span></label>
       <input
         id="product-name"
         v-model="form.name"
         @input="validateName(form.name)"
-        @blur="validation.nameValid.isShown=!validation.nameValid.isValid"
+        @blur="validation.nameValid.isShown = !validation.nameValid.isValid"
         type="text"
         class="input"
         name="product-name"
         data-validation="required"
         placeholder="Введите наименование товара"
       />
-      <span v-if="validation.nameValid.isShown"
-            class="form__inputError">Поле является обязательным</span>
+      <span v-if="validation.nameValid.isShown" class="form__inputError"
+        >Поле является обязательным</span
+      >
     </div>
 
     <div class="form__inputWrapper">
@@ -41,15 +37,16 @@
         id="product-link"
         v-model="form.link"
         @input="validateLink(form.link)"
-        @blur="validation.linkValid.isShown=!validation.linkValid.isValid"
+        @blur="validation.linkValid.isShown = !validation.linkValid.isValid"
         type="url"
         class="input"
         name="product-link"
         data-validation="required"
         placeholder="Введите ссылку"
       />
-      <span v-if="validation.linkValid.isShown"
-            class="form__inputError">Неверный формат ссылки</span>
+      <span v-if="validation.linkValid.isShown" class="form__inputError"
+        >Неверный формат ссылки</span
+      >
     </div>
 
     <div class="form__inputWrapper form__inputWrapper--required">
@@ -57,17 +54,17 @@
       <input
         id="product-price"
         v-model="form.price"
-        @input="validatePrice(form.price=numberWithCommas)"
-
-        @blur="validation.priceValid.isShown=!validation.priceValid.isValid"
+        @input="validatePrice((form.price = numberWithCommas))"
+        @blur="validation.priceValid.isShown = !validation.priceValid.isValid"
         type="text"
         class="input"
         name="product-price"
         data-validation="required"
         placeholder="Введите цену"
       />
-      <span v-if="validation.priceValid.isShown"
-            class="form__inputError">Поле является обязательным</span>
+      <span v-if="validation.priceValid.isShown" class="form__inputError"
+        >Поле является обязательным</span
+      >
     </div>
 
     <div class="form__button">
@@ -76,7 +73,9 @@
         class="button"
         value="Добавить товар"
         :disabled="!isFormValid"
-        @click.prevent="addproduct(link, name, description, price)"
+        @click.prevent="
+          addproduct(form.link, form.name, form.description, form.price)
+        "
       />
       <!--      добавить выше  disabled="disabled"-->
     </div>
@@ -85,10 +84,7 @@
 
 <script>
 export default {
-
-  props: [
-    'addproduct'
-  ],
+  props: ['addproduct'],
 
   data() {
     return {
@@ -97,7 +93,6 @@ export default {
         name: '',
         description: '',
         price: '',
-
       },
       validation: {
         nameValid: {
@@ -112,30 +107,36 @@ export default {
           isValid: false,
           isShown: false,
         },
-      }
+      },
     }
   },
 
   computed: {
     isFormValid() {
-      return (this.validation.nameValid.isValid && this.validation.linkValid.isValid && this.validation.priceValid.isValid)
+      return (
+        this.validation.nameValid.isValid &&
+        this.validation.linkValid.isValid &&
+        this.validation.priceValid.isValid
+      )
     },
 
     numberWithCommas() {
-      return this.form.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, " ");
-
-    }
+      return this.form.price
+        .toString()
+        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ' ')
+    },
   },
 
   methods: {
     validURL(str) {
-      const res = str.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g);
-      return (res !== null)
-
+      const res = str.match(
+        /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g
+      )
+      return res !== null
     },
 
     validateName(name) {
-      this.validation.nameValid.isValid = name.length > 3;
+      this.validation.nameValid.isValid = name.length > 3
       this.validation.nameValid.isShown = false
     },
 
@@ -147,10 +148,9 @@ export default {
 
     validatePrice(price) {
       Number(price)
-      this.validation.priceValid.isValid = price.length > 0;
+      this.validation.priceValid.isValid = price.length > 0
       this.validation.priceValid.isShown = false
     },
-
   },
 }
 </script>
@@ -304,7 +304,6 @@ export default {
 }
 
 @media screen and (max-width: 1023px) {
-
 }
 
 @media screen and (max-width: 820px) {
