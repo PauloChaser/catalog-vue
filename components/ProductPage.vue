@@ -4,20 +4,21 @@
       <div class="addProduct__content">
         <div class="addProduct__leftSide">
           <h2 class="addProduct__title">Добавление товара</h2>
-          <AddForm class="addProduct__form" :addproduct="addProduct" />
+          <AddForm class="addProduct__form" :addproduct="addProduct"/>
         </div>
         <div class="container__catalog catalog">
           <div class="catalog__filter">
-            <select class="select" name="type">
-              <option value="По умолчанию">По умолчанию</option>
-              <option value="По возрастанию цены">По возрастанию цены</option>
-              <option value="По убыванию цены">По убыванию цены</option>
+            <select class="select" name="type" v-model="selected">
+              <option value="default">По умолчанию</option>
+              <option value="name">По наименованию</option>
+              <option value="asc">По возрастанию цены</option>
+              <option value="desc">По убыванию цены</option>
             </select>
           </div>
           <div class="catalog__items">
             <CatalogItem
-              v-for="item in items"
-              :key="item"
+              v-for="item in sortedItems"
+              :key="item.id"
               :product="item"
               :removeproduct="removeProduct"
             />
@@ -34,62 +35,87 @@ export default {
     return {
       items: [
         {
-          id: 1,
-          image: '/item-img-retina.jpg',
-          name: 'Наименование товара',
-          description:
-            'Довольно-таки интересное описание товара в несколько строк.\n' +
-            '                                Довольно-таки интересное описание товара в несколько строк',
-          price: '10 000',
-        },
-        {
           id: 2,
           image: '/item-img-retina.jpg',
-          name: 'Наименование товара',
+          name: 'Наименование товара 2',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
             '                                Довольно-таки интересное описание товара в несколько строк',
-          price: '11 000',
+          price: 11000,
+        },
+        {
+          id: 1,
+          image: '/item-img-retina.jpg',
+          name: 'Наименование товара 1',
+          description:
+            'Довольно-таки интересное описание товара в несколько строк.\n' +
+            '                                Довольно-таки интересное описание товара в несколько строк',
+          price: 10000,
         },
         {
           id: 3,
           image: '/item-img-retina.jpg',
-          name: 'Наименование товара',
+          name: 'Наименование товара 3',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
             '                                Довольно-таки интересное описание товара в несколько строк',
-          price: '14 000',
+          price: 14000,
         },
         {
           id: 4,
           image: '/item-img-retina.jpg',
-          name: 'Наименование товара',
+          name: 'Наименование товара 4',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
             '                                Довольно-таки интересное описание товара в несколько строк',
-          price: '16 000',
+          price: 16000,
         },
         {
           id: 5,
           image: '/item-img-retina.jpg',
-          name: 'Наименование товара',
+          name: 'Наименование товара 5',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
             '                                Довольно-таки интересное описание товара в несколько строк',
-          price: '19 000',
+          price: 19000,
         },
       ],
+      selected: 'default'
     }
   },
+
   methods: {
     addProduct(link, name, description, price) {
       const id = Math.random().toString(36).slice(2)
-      this.items.push({ id, image: link, name, description, price })
+      this.items.push({id, image: link, name, description, price})
     },
     removeProduct(id) {
       this.items = this.items.filter((item) => item.id !== id)
     },
   },
+
+  computed: {
+    sortedItems() {
+      switch (this.selected) {
+        case 'asc':
+          return [...this.items].sort((a, b) => a.price - b.price);
+        case 'desc':
+          return [...this.items].sort((a, b) => b.price - a.price);
+        case 'name':
+          return [...this.items].sort(function (a, b) {
+            if (a.name < b.name) {
+              return -1;
+            }
+            if (a.name > b.name) {
+              return 1;
+            }
+            return 0;
+          });
+        default:
+          return this.items
+      }
+    },
+  }
 }
 </script>
 
