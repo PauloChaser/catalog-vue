@@ -4,7 +4,7 @@
       <div class="addProduct__content">
         <div class="addProduct__leftSide">
           <h2 class="addProduct__title">Добавление товара</h2>
-          <AddForm class="addProduct__form" :addproduct="addProduct"/>
+          <AddForm class="addProduct__form" :addproduct="addProduct" />
         </div>
         <div class="container__catalog catalog">
           <div class="catalog__filter">
@@ -15,7 +15,12 @@
             </select>
           </div>
           <div class="catalog__items">
-            <CatalogItem v-for="item in items" :key="item" :product="item"/>
+            <CatalogItem
+              v-for="item in items"
+              :key="item"
+              :product="item"
+              :removeproduct="removeProduct"
+            />
           </div>
         </div>
       </div>
@@ -29,57 +34,61 @@ export default {
     return {
       items: [
         {
-          image: '/item-img.jpg',
-          imageRetina: '/item-img-retina.jpg',
+          id: 1,
+          image: '/item-img-retina.jpg',
           name: 'Наименование товара',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
             '                                Довольно-таки интересное описание товара в несколько строк',
-          price: '10 000 руб.',
+          price: '10 000',
         },
         {
-          image: '/item-img.jpg',
-          imageRetina: '/item-img-retina.jpg',
+          id: 2,
+          image: '/item-img-retina.jpg',
           name: 'Наименование товара',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
             '                                Довольно-таки интересное описание товара в несколько строк',
-          price: '11 000 руб.',
+          price: '11 000',
         },
         {
-          image: '/item-img.jpg',
-          imageRetina: '/item-img-retina.jpg',
+          id: 3,
+          image: '/item-img-retina.jpg',
           name: 'Наименование товара',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
             '                                Довольно-таки интересное описание товара в несколько строк',
-          price: '14 000 руб.',
+          price: '14 000',
         },
         {
-          image: '/item-img.jpg',
-          imageRetina: '/item-img-retina.jpg',
+          id: 4,
+          image: '/item-img-retina.jpg',
           name: 'Наименование товара',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
             '                                Довольно-таки интересное описание товара в несколько строк',
-          price: '16 000 руб.',
+          price: '16 000',
         },
         {
-          image: '/item-img.jpg',
-          imageRetina: '/item-img.jpg',
+          id: 5,
+          image: '/item-img-retina.jpg',
           name: 'Наименование товара',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
             '                                Довольно-таки интересное описание товара в несколько строк',
-          price: '19 000 руб.',
+          price: '19 000',
         },
       ],
     }
   },
   methods: {
     addProduct(link, name, description, price) {
-      this.items.push({image: link, imageRetina: link, name, description, price})
-    }
+      const id = Math.random().toString(36).slice(2)
+      this.items.push({ id, image: link, name, description, price })
+    },
+    removeProduct(id) {
+      this.items = this.items.filter((item) => item.id !== id)
+    },
   },
 }
 </script>
@@ -168,7 +177,6 @@ export default {
   width: 100%;
 }
 
-
 @media screen and (max-width: 1023px) {
   .container {
     padding: 20px;
@@ -186,7 +194,6 @@ export default {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
 
 @media screen and (max-width: 820px) {
   .addProduct__content {
