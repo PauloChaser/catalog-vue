@@ -4,7 +4,7 @@
       <div class="addProduct__content">
         <div class="addProduct__leftSide">
           <h2 class="addProduct__title">Добавление товара</h2>
-          <AddForm class="addProduct__form" :addproduct="addProduct"/>
+          <AddForm class="addProduct__form" :addproduct="addProduct" />
         </div>
         <div class="container__catalog catalog">
           <div class="catalog__filter">
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <PopFromTop :pop="isHintShown"/>
+    <PopFromTop :pop="isHintShown" />
   </section>
 </template>
 
@@ -93,9 +93,9 @@ export default {
   beforeMount() {
     if (localStorage.getItem('items')) {
       try {
-        this.items = JSON.parse(localStorage.getItem('items'));
-      } catch(e) {
-        localStorage.removeItem('items');
+        this.items = JSON.parse(localStorage.getItem('items'))
+      } catch (e) {
+        localStorage.removeItem('items')
       }
     }
     this.isLoading = false
@@ -104,12 +104,12 @@ export default {
   methods: {
     addProduct(link, name, description, price) {
       const id = Math.random().toString(36).slice(2)
-      this.items.push({id, image: link, name, description, price})
+      this.items.push({ id, image: link, name, description, price })
       this.setLocalItems()
-      this.isHintShown=true
+      this.isHintShown = true
       setTimeout(() => {
-        this.isHintShown = false;
-      }, 2000);
+        this.isHintShown = false
+      }, 2000)
     },
     removeProduct(id) {
       this.items = this.items.filter((item) => item.id !== id)
@@ -117,31 +117,31 @@ export default {
     },
     setLocalItems() {
       localStorage.setItem('items', JSON.stringify(this.items))
-    }
+    },
   },
 
   computed: {
     sortedItems() {
       switch (this.selected) {
         case 'asc':
-          return [...this.items].sort((a, b) => a.price - b.price);
+          return [...this.items].sort((a, b) => a.price - b.price)
         case 'desc':
-          return [...this.items].sort((a, b) => b.price - a.price);
+          return [...this.items].sort((a, b) => b.price - a.price)
         case 'name':
           return [...this.items].sort(function (a, b) {
             if (a.name < b.name) {
-              return -1;
+              return -1
             }
             if (a.name > b.name) {
-              return 1;
+              return 1
             }
-            return 0;
-          });
+            return 0
+          })
         default:
           return this.items
       }
     },
-  }
+  },
 }
 </script>
 
