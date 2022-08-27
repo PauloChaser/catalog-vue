@@ -73,11 +73,8 @@
         class="button"
         value="Добавить товар"
         :disabled="!isFormValid"
-        @click.prevent="
-          addproduct(form.link, form.name, form.description, form.price)
-        "
+        @click.prevent="setForm"
       />
-      <!--      добавить выше  disabled="disabled"-->
     </div>
   </form>
 </template>
@@ -121,11 +118,14 @@ export default {
     },
 
     numberWithCommas() {
-      return this.form.price
-        .toString()
-        // .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ' ')
-        // input only numbers
-        .replace(/[^0-9]/g, "").slice(0, 10);
+      return (
+        this.form.price
+          .toString()
+          // .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ' ')
+          // input only numbers
+          .replace(/[^0-9]/g, '')
+          .slice(0, 10)
+      )
     },
   },
 
@@ -152,6 +152,22 @@ export default {
       Number(price)
       this.validation.priceValid.isValid = price.length > 0
       this.validation.priceValid.isShown = false
+    },
+
+    setForm() {
+      this.addproduct(
+        this.form.link,
+        this.form.name,
+        this.form.description,
+        this.form.price
+      )
+      this.form.link = ''
+      this.form.name = ''
+      this.form.description = ''
+      this.form.price = ''
+      this.validation.nameValid.isValid = false
+      this.validation.linkValid.isValid = false
+      this.validation.priceValid.isValid = false
     },
   },
 }
@@ -234,7 +250,6 @@ export default {
   margin: 0 0 4px;
 }
 
-/* чекнуть реализацию кружка */
 .form__inputWrapper label span {
   font-weight: 400;
   font-size: 10px;
