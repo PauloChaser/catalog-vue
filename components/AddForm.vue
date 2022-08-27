@@ -123,7 +123,9 @@ export default {
     numberWithCommas() {
       return this.form.price
         .toString()
-        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ' ')
+        // .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ' ')
+        // input only numbers
+        .replace(/[^0-9]/g, "").slice(0, 10);
     },
   },
 

@@ -29,6 +29,7 @@
         </div>
       </div>
     </div>
+    <PopFromTop :pop="isHintShown"/>
   </section>
 </template>
 
@@ -85,6 +86,7 @@ export default {
       ],
       selected: 'default',
       isLoading: true,
+      isHintShown: false,
     }
   },
 
@@ -104,6 +106,10 @@ export default {
       const id = Math.random().toString(36).slice(2)
       this.items.push({id, image: link, name, description, price})
       this.setLocalItems()
+      this.isHintShown=true
+      setTimeout(() => {
+        this.isHintShown = false;
+      }, 2000);
     },
     removeProduct(id) {
       this.items = this.items.filter((item) => item.id !== id)
