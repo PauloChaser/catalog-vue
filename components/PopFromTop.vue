@@ -1,16 +1,17 @@
 <template>
-  <div class="popTop" :class="{ active: pop }">Товар успешно добавлен</div>
+  <div class="popTop" :class="{ active: isHintShown }">Товар успешно добавлен</div>
 </template>
 
 <script>
 export default {
-  props: [
-    'pop'
-  ]
+  props: {
+    isHintShown: Boolean,
+  }
+
 }
 </script>
 
-<style>
+<style scoped>
 .popTop {
   position: fixed;
   z-index: 101;
@@ -19,7 +20,7 @@ export default {
   right: 0;
   background: #27bce7;
   text-align: center;
-  line-height: 2.5;
+  line-height: 2;
   overflow: hidden;
   -webkit-box-shadow: 0 0 5px black;
   -moz-box-shadow: 0 0 5px black;

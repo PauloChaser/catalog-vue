@@ -8,7 +8,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .spinner {
   position: absolute;
   left: 50%;
