@@ -1,4 +1,8 @@
-# idaproject
+# Реализация тестового задания на Vue 2
+
+
+
+![image](https://github.com/PauloChaser/ida-project-test/blob/master/vue-test.gif)
 
 ## В приложении реализовано:
 
@@ -17,7 +21,7 @@
 
 ## Build Setup
 
-```bash
+```
 git clone https://github.com/PauloChaser/ida-project-test.git
 cd ida-project-test
 npm install
