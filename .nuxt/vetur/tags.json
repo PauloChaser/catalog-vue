@@ -1,0 +1,17 @@
+{
+  "AddForm": {
+    "description": "Auto imported from components/AddForm.vue"
+  },
+  "CatalogItem": {
+    "description": "Auto imported from components/CatalogItem.vue"
+  },
+  "PopFromTop": {
+    "description": "Auto imported from components/PopFromTop.vue"
+  },
+  "ProductPage": {
+    "description": "Auto imported from components/ProductPage.vue"
+  },
+  "SpinnerLoader": {
+    "description": "Auto imported from components/SpinnerLoader.vue"
+  }
+}
