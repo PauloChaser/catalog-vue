@@ -40,7 +40,7 @@ export default {
       items: [
         {
           id: 2,
-          image: '/item-img-retina.jpg',
+          image: './item-img-retina.jpg',
           name: 'Наименование товара 2',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
@@ -49,7 +49,7 @@ export default {
         },
         {
           id: 1,
-          image: '/item-img-retina.jpg',
+          image: './item-img-retina.jpg',
           name: 'Наименование товара 1',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
@@ -58,7 +58,7 @@ export default {
         },
         {
           id: 3,
-          image: '/item-img-retina.jpg',
+          image: './item-img-retina.jpg',
           name: 'Наименование товара 3',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
@@ -67,7 +67,7 @@ export default {
         },
         {
           id: 4,
-          image: '/item-img-retina.jpg',
+          image: './item-img-retina.jpg',
           name: 'Наименование товара 4',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +
@@ -76,7 +76,7 @@ export default {
         },
         {
           id: 5,
-          image: '/item-img-retina.jpg',
+          image: './item-img-retina.jpg',
           name: 'Наименование товара 5',
           description:
             'Довольно-таки интересное описание товара в несколько строк.\n' +

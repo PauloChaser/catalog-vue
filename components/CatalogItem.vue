@@ -28,7 +28,7 @@ export default {
   background: #fffefb;
   box-shadow: 0 20px 30px rgb(0 0 0 / 4%), 0 6px 10px rgb(0 0 0 / 2%);
   border-radius: 4px;
-  cursor: url('/cursor.png'), pointer;
+  cursor: url('./cursor.png'), pointer;
 
   /* width: calc(33% - 10px); */
   position: relative;
